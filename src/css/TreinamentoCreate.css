@@ -1,0 +1,70 @@
+.training-layout {
+    display: flex;
+    height: calc(100vh - 70px);
+    background: var(--color-background);
+}
+
+.training-sidebar {
+    width: 350px;
+    min-width: 350px;
+    background: var(--color-surface);
+    border-right: 1px solid rgba(0,0,0,.08);
+    overflow-y: auto;
+}
+
+.training-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    z-index: 1;
+}
+
+.tree {
+    padding: 15px;
+}
+
+.tree-training {
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tree-training:hover {
+    background: rgba(45,212,191,.08);
+}
+
+.tree-module {
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.tree-module > div:first-child {
+    font-weight: 600;
+}
+
+.tree-lesson {
+    margin-left: 20px;
+    margin-top: 5px;
+    color: var(--color-muted);
+    cursor: pointer;
+}
+
+.tree-lesson:hover {
+    color: var(--color-accent);
+}
+
+.form-card {
+    background: var(--color-surface);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}

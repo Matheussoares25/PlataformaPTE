@@ -1,0 +1,28 @@
+
+
+:root{
+  --bg: #eef3f8;
+  --panel: #f8fafc;
+  --muted: #64748b;
+
+  --accent: #14b8a6;
+  --accent-2: #4f7cff;
+
+  --glass: rgba(15,23,42,0.05);
+  --glass-2: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0.3)
+  );
+  --titles:#000000;
+  --text:#1e2022;
+
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(15,23,42,0.08);
+
+  --color-background: var(--bg);
+  --color-surface: var(--panel);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+}

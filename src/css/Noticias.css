@@ -1,0 +1,113 @@
+@import url('../styles/theme.css');
+
+.noticias-page {
+  background: var(--color-background);
+  min-height: 100vh;
+  color: var(--color-muted);
+}
+
+/* Título */
+.noticias-page h2 {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* BOTÕES TOPO */
+.noticias-page .btn {
+  border-radius: var(--radius);
+  font-weight: 600;
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+}
+
+/* Cards com glass + profundidade */
+.noticias-page .card {
+  background: linear-gradient(180deg, var(--color-surface), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: 0.25s ease;
+}
+
+.noticias-page .card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 221, 0.562);
+   box-shadow: 0 12px 50px rgba(0, 9, 63, 0.5);
+}
+
+/* BODY DO CARD */
+.noticias-page .card-body {
+  padding: 18px;
+}
+
+/* BADGE mais moderno */
+.noticias-page .badge {
+  font-size: 0.7rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Título */
+.noticias-page .card-title {
+  color: var(--titles);
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+/* Texto */
+.noticias-page .card-text {
+  color: var(--color-muted);
+  font-size: 18px;
+}
+
+/* FOOTER mais limpo */
+.noticias-page .card-footer {
+  background: rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* BOTÕES DO CARD */
+.noticias-page .card-footer .btn {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+/* Editar */
+.noticias-page .btn-primary {
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.noticias-page .btn-primary:hover {
+  background: var(--color-accent);
+  color: #041018;
+}
+
+/* Excluir */
+.noticias-page .btn-danger {
+  background: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+}
+
+.noticias-page .btn-danger:hover {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+/* Inscrever */
+.noticias-page .btn-success {
+  background: var(--color-accent);
+  color: #041018;
+  border: none;
+}
+
+.noticias-page .btn-success:hover {
+  filter: brightness(1.1);
+}

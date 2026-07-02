@@ -1,0 +1,81 @@
+@import url('../styles/theme.css');
+
+.home-page {
+    min-height: 100vh;
+    background: var(--color-background);
+    padding: 40px 20px;
+}
+
+.menuOption {
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+    text-decoration: none;
+    color: var(--titles);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 25px;
+    background-color: var(--muted);
+}
+
+.menuOption:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-accent-2);
+    box-shadow: 0 12px 50px rgba(0, 9, 63, 0.5);
+}
+
+.menuOption h5 {
+    margin: 0;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.home-page .card-title {
+    color: var(--titles);
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.menuIcon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+    filter: brightness(0) invert(1);
+}
+
+.menuOption:hover .menuIcon {
+    transform: scale(1.1);
+}
+
+.home-page .row {
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.page-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.badge-custom {
+    background: var(--color-accent);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+}

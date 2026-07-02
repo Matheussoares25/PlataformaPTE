@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Minha Empresa</div>
+      <nav class="nav">
+        <a class="active" href="#">Dashboard</a>
+        <a href="#">Relatórios</a>
+        <a href="#">Usuários</a>
+        <a href="#">Configurações</a>
+      </nav>
+      <div class="sidebar-footer">© 2026</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <input type="search" placeholder="Pesquisar..." />
+        </div>
+        <div class="actions">
+          <button class="btn ghost">Exportar</button>
+          <div class="avatar" title="Usuário">JD</div>
+        </div>
+      </header>
+
+      <section class="content">
+        <h1 class="title">Visão geral</h1>
+
+        <div class="cards grid-4">
+          <div class="card">
+            <div class="card-title">Receita</div>
+            <div class="card-value">R$ 124.320</div>
+            <div class="card-meta">+12% vs mês anterior</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Usuários</div>
+            <div class="card-value">8.412</div>
+            <div class="card-meta">+4.8% últimos 30 dias</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Conversões</div>
+            <div class="card-value">3.8%</div>
+            <div class="card-meta">Meta: 4.5%</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Tickets</div>
+            <div class="card-value">24</div>
+            <div class="card-meta">Resolvidos: 20</div>
+          </div>
+        </div>
+
+        <div class="main-layout">
+          <div class="panel chart">
+            <div class="panel-header">Atividade</div>
+            <div class="placeholder">[Gráfico aqui]</div>
+          </div>
+
+          <div class="panel table">
+            <div class="panel-header">Últimas transações</div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>João Silva</td>
+                    <td>R$120</td>
+                    <td>2026-06-28</td>
+                    <td><span class="badge success">Concluído</span></td>
+                  </tr>
+                  <tr>
+                    <td>Empresa X</td>
+                    <td>R$1.200</td>
+                    <td>2026-06-27</td>
+                    <td><span class="badge warning">Pendente</span></td>
+                  </tr>
+                  <tr>
+                    <td>Maria</td>
+                    <td>R$560</td>
+                    <td>2026-06-25</td>
+                    <td><span class="badge danger">Falha</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <footer class="footer">Última atualização: 30/06/2026</footer>
+    </main>
+  </div>
+</body>
+</html>

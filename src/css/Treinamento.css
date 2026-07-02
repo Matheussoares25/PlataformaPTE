@@ -1,0 +1,118 @@
+@import url('../styles/theme.css');
+
+.treinamento-page {
+    background: var(--color-background);
+    color: var(--color-muted);
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+/* Aproxima as seções */
+.treinamento-page + .treinamento-page {
+    padding-top: 0 !important;
+    margin-top: -10px;
+}
+
+/* Título */
+.treinamento-page h2 {
+    color: #1f2937;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* Botão principal */
+.btn-accent {
+    background: var(--color-accent);
+    color: #06201c;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    box-shadow: var(--shadow);
+    transition: all 0.25s ease;
+}
+
+/* BOTÃO principal */
+.treinamento-page .btn-accent {
+  background: var(--color-accent);
+  color: #06201c;
+  font-weight: 600;
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  box-shadow: var(--shadow);
+  transition: 0.2s;
+}
+
+.treinamento-page .btn-accent:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+}
+
+/* CARD */
+.treinamento-page .training-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: 0.25s ease;
+  overflow: hidden;
+}
+
+.treinamento-page .training-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(45, 212, 191, 0.3);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+/* BODY */
+.treinamento-page .card-body {
+  padding: 18px;
+}
+
+/* Título card */
+.treinamento-page .card-title {
+  color: #111827;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* Texto */
+.treinamento-page .card-text {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+/* BADGE nível */
+.treinamento-page .badge-level {
+  background: rgba(45, 212, 191, 0.12);
+  color: var(--color-accent);
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+/* FOOTER */
+.treinamento-page .card-footer {
+  background: transparent;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* botão outline */
+.treinamento-page .btn-outline {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  background: transparent;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.treinamento-page .btn-outline:hover {
+  background: var(--color-accent);
+  color: #06201c;
+}

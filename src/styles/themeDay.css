@@ -1,0 +1,23 @@
+:root {
+  /* Base colors (tema claro moderno) */
+  --bg: #f6f8fc; /* fundo mais leve e clean */
+  --panel: #ffffff; /* cards brancos */
+  --muted: #5b6675; /* texto secundário mais suave */
+  --accent: #2dd4bf; /* teal mais claro e amigável */
+  --accent-2: #6d8dff; /* azul mais leve */
+
+  /* Utilities */
+  --glass: rgba(15, 23, 42, 0.06);
+  --glass-2: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(245,247,250,0.6));
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --titles: #0f172a;
+  --text: #3b3b3b;
+
+  /* Semantic aliases */
+  --color-background: var(--bg);
+  --color-surface: var(--panel);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+}

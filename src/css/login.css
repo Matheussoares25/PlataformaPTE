@@ -1,0 +1,57 @@
+@import url('../styles/theme.css');
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg);
+   
+}
+
+.login-card {
+    width: 350px;
+    padding: 30px;
+    background: var(--color-muted);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.login-card h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-card input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: #0d6efd;
+}
+
+.login-card button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #0d6efd;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-card button:hover {
+    background-color: #0b5ed7;
+}
