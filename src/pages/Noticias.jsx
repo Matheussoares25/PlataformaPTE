@@ -25,10 +25,12 @@ export default function Noticias() {
 
   async function carregarNoticias() {
     try {
-      const noticias = await Api.CallEndpoint("Noticia", "GET");
-      const vagas = await Api.CallEndpoint("Vagas", "GET");
-      setNoticias(noticias);
-      setVagas(vagas);
+      const [noticiasApi, vagasApi] = await Promise.all([
+        Api.CallEndpoint("Noticia", "GET"),
+        Api.CallEndpoint("Vagas", "GET"),
+      ]);
+      setNoticias(noticiasApi);
+      setVagas(vagasApi);
     } catch (error) {
       Swal.fire({
         icon: "error",

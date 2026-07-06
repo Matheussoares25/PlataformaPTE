@@ -56,7 +56,10 @@ export default function Treinamento() {
             nome: t.nome,
             criado: t.criado,
         })) || [])
+        
     ];
+
+
 
     useEffect(() => {
         carregarTreinamentos();
@@ -107,7 +110,7 @@ export default function Treinamento() {
                     <div className="mb-4 d-flex justify-content-between align-items-center">
                         <h2>Treinamentos</h2>
                     <Link to="/CriarTreinamento">
-                        <button className="btn btn-accent">
+                        <button className="btn btn-accent" >
                             Novo Treinamento
                         </button>
                     </Link>

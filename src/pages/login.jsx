@@ -84,7 +84,6 @@ function Login() {
         <div className="login-page">
             <div className="login-card">
                 <h1>Login</h1>
-
                 <form onSubmit={fazerLogin}>
                     <input
                         name="email"
@@ -97,7 +96,6 @@ function Login() {
                         type="password"
                         placeholder="Senha"
                     />
-
                     <button type="submit">
                         Entrar
                     </button>

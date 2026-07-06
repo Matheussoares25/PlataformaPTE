@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 export const termoDeUso = ` 
         <div style="text-align: left; max-height: 300px; overflow-y: auto; padding-right: 10px; line-height: 1.5;">
 
@@ -109,23 +108,23 @@ export const termoDeUso = `
 
 
         </div>
-`
-
+`;
 
 export const swalDeleteNoticia = {
-    title: 'Excluir Notícia',
-    text: 'Tem certeza que deseja excluir esta notícia?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sim, excluir',
-    cancelButtonText: 'Cancelar'
+  title: "Excluir Notícia",
+  text: "Tem certeza que deseja excluir esta notícia?",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonText: "Sim, excluir",
+  cancelButtonText: "Cancelar",
 };
 
 export const swalDeleteVaga = {
-    title: 'Excluir Vaga',
-    text: 'Tem certeza que deseja excluir esta vaga?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sim, excluir',
-    cancelButtonText: 'Cancelar'
-}
+  title: "Excluir Vaga",
+  text: "Tem certeza que deseja excluir esta vaga?",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonText: "Sim, excluir",
+  cancelButtonText: "Cancelar",
+};
+

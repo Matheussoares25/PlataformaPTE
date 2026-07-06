@@ -1,9 +1,13 @@
+import Swal from "sweetalert2";
 
 
 class Api {
+
+
     static async CallEndpoint(setor, method, body = null, id = null) {
 
         const token = localStorage.getItem('token');
+
 
         const options = {
             method,
@@ -26,20 +30,35 @@ class Api {
         const response = await fetch(url, options);
 
 
+
         if (response.status === 400) {
             const erro = await response.json();
             throw new Error(`Erro ${response.status}: ${erro.message}`);
         }
-        
+
 
         if (response.status === 204) {
             return null;
         }
-
-
         if (response.status === 403) {
-            throw new Error('Você não tem permissão para realizar esta operação.');
+            let erro = {};
+
+            try {
+                erro = await response.json();
+            } catch {
+                // resposta sem corpo
+            }
+
+            if (erro?.message?.includes('Nenhuma licença atribuída ao usuário.')) {
+                throw new Error('Você não possui uma licença ativa.');
+            }
+
+            throw new Error(
+                erro?.message || 'Você não tem permissão para realizar esta operação.'
+            );
         }
+
+
 
 
         if (!response.ok) {
@@ -51,10 +70,15 @@ class Api {
                     mensagem: erro.message
                 };
             }
+
+            if (response.status == 401) {
+                throw new Error('Senha ou login incorretos.');
+            }
         }
 
         return await response.json();
     }
+
 }
 
 export default Api;
