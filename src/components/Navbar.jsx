@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Route, Router} from 'react-router-dom';
 
 
 function Navbar() {
@@ -6,6 +6,10 @@ function Navbar() {
       localStorage.removeItem('token');
       localStorage.clear();
     window.location.href = '/';
+
+
+
+
   };
 
   return (

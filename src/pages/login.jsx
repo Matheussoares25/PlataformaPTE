@@ -1,4 +1,4 @@
-import Api from "../services/EndPoint";
+import Api from "../services/AuthService";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";

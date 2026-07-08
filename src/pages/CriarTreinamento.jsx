@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Api from "../services/EndPoint";
-import { Await, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/TreinamentoCreate.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { erro, sucesso } from "../components/icones";
+import TreinamentoSidebar from "../components/CriaTComponentes/TreinamentoSideBar";
+import TreinamentoForm from "../components/CriaTComponentes/TreinamentoForm";
+import ModulosTabela from "../components/CriaTComponentes/ModulosTabela";
+import AbrirModulo from "../components/CriaTComponentes/AbrirModulo";
+import NovaAulaForm from "../components/CriaTComponentes/NovaAulaForm";
 
 export default function TreinamentoCreate() {
   const [treinamentos, setTreinamentos] = useState([]);
@@ -10,11 +17,13 @@ export default function TreinamentoCreate() {
   const [id, setId] = useState(null);
   const [nome, setNome] = useState("");
   const [treinamentoSelecionado, setTreinamentoSelecionado] = useState(null);
+  const [moduloSelecionado, setModuloSelecionado] = useState(null);
+  const [aulaSelecionada, setAulaSelecionada] = useState(null);
+  const [aulanova, setNovaAula] = useState(false);
 
   async function abrirAula(id) {
-    const dados = await Api.CallEndpoint("Aulas/modulo", "GET", null, id);
+    const dados = await Api.CallEndpoint("Aulas", "GET", null, id);
   }
-
   async function carregarTreinamentos() {
     try {
       const response = await Api.CallEndpoint("Treinamento/Completo", "GET");
@@ -29,16 +38,100 @@ export default function TreinamentoCreate() {
   }
 
   async function openEditTreinamento(treinamento) {
+    setModuloSelecionado(null);
+    setNovaAula(null);
+
     setEditar(true);
     setId(treinamento.id);
     setNome(treinamento.nome);
     setTreinamentoSelecionado(treinamento);
   }
-
-  function novoTreinamento() {
-    setEditar(false);
-    
+  async function abrirModulo(id) {
+    const dados = await Api.CallEndpoint("Modulos", "GET", null, id);
+    setNovaAula(null);
+    setModuloSelecionado(dados);
   }
+
+  async function novoTreinamento() {
+    setEditar(false);
+    setTreinamentoSelecionado(null);
+    setModuloSelecionado(null);
+  }
+  async function novoModulo(treinamentoSelecionado) {
+    Swal.fire({
+      title: "📰 Novo Modulo",
+      text: "Digite o nome do modulo",
+      html: `<input type="text" id="swal-input1" class="swal2-input" placeholder="Digite o nome do modulo">`,
+      showCancelButton: true,
+      confirmButtonText: "Salvar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        return {
+          treinamento: treinamentoSelecionado.id,
+          nome: document.getElementById("swal-input1").value,
+
+          treinamentoId: treinamentoSelecionado.id,
+        };
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await Api.CallEndpoint("Modulos", "POST", {
+            treinamento_id: result.value.treinamento,
+            nome: result.value.nome,
+          });
+          Swal.fire({
+            icon: "success",
+            title: "Modulo criado!",
+            text: "O modulo foi criado com sucesso.",
+          });
+          carregarTreinamentos();
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Erro",
+            text: error.message,
+          });
+        }
+      }
+    });
+  }
+
+  async function novaAula() {
+    setNovaAula(true);
+  }
+
+  const criarnovaaula = async ({ nome, conteudo, url }) => {
+    try {
+      const res = await Api.CallEndpoint("Aulas", "POST", {
+        nome,
+        conteudo,
+        modulo_id: moduloSelecionado.modulo.id,
+        midia_url: "",
+      });
+
+      if (res) {
+        Swal.fire({
+          icon: "success",
+          title: "Aula criada!",
+          text: "A aula foi criada com sucesso.",
+        });
+        carregarTreinamentos(); // ou o que for equivalente aqui
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erro",
+          text: "Não foi possível criar a aula.",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: error.message,
+      });
+    }
+  };
 
   //Exclusões
   async function excluirTreinamento() {
@@ -94,6 +187,7 @@ export default function TreinamentoCreate() {
             null,
             id,
           );
+
           Swal.fire({
             icon: "success",
             title: "Modulo excluido!",
@@ -110,51 +204,104 @@ export default function TreinamentoCreate() {
       }
     });
   }
-
-  async function novoModulo(treinamentoSelecionado) {
-    Swal.fire({
-      title: "📰 Novo Modulo",
-      text: "Digite o nome do modulo",
-      html: `<input type="text" id="swal-input1" class="swal2-input" placeholder="Digite o nome do modulo">`,
+  const excluirAula = async (idAula) => {
+    const resposta = await Swal.fire({
+      icon: "question",
+      title: "Excluir Aula",
+      text: "Tem certeza que deseja excluir a aula?",
       showCancelButton: true,
-      confirmButtonText: "Salvar",
-      cancelButtonText: "Cancelar",
-      preConfirm: () => {
-        return {
-          treinamento: treinamentoSelecionado.id,
-          nome: document.getElementById("swal-input1").value,
+      confirmButtonText: "Sim",
+      cancelButtonText: "Nao",
+    });
+    if (!resposta.isConfirmed) return;
+    try {
+      await Api.CallEndpoint("Aulas", "DELETE", null, idAula);
+      abrirModulo(moduloSelecionado.modulo.id);
+      carregarTreinamentos();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-          treinamentoId: treinamentoSelecionado.id,
-        };
+  async function informacoesTreinamento() {
+    // /api/UseTreinamentos/treinamento/{treinamentoId}
+
+    const response = await Api.CallEndpoint(
+      "Matriculas/treinamento",
+      "GET",
+      null,
+      id,
+    );
+
+    Swal.fire({
+      title: "📰 Informações do Treinamento",
+      width: "900px",
+      html: `
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+      <h3 style="margin:0;">Alunos Cadastrados</h3>
+      <button 
+        id="btnNovoAluno"
+        style="
+          background:#3085d6;
+          color:white;
+          border:none;
+          padding:10px 15px;
+          border-radius:5px;
+          cursor:pointer;
+        "
+      >
+        + Cadastrar Novo Aluno
+      </button>
+    </div>
+
+    <div
+      style="
+        max-height:350px;
+        overflow-y:auto;
+        border:1px solid #ddd;
+        border-radius:5px;
+      "
+    >
+      <table style="width:100%; border-collapse:collapse;">
+        <thead style="position:sticky; top:0; background:white;">
+          <tr>
+            <th style="border-bottom:1px solid #ddd; padding:10px;">ID</th>
+            <th style="border-bottom:1px solid #ddd; padding:10px;">Nome</th>
+            <th style="border-bottom:1px solid #ddd; padding:10px;">Email</th>
+            <th style="border-bottom:1px solid #ddd; padding:10px;">Status</th>
+          </tr>
+        </thead>
+        ${response.map(
+          (aluno) =>
+            `<tr>
+            <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.usuario.id}</td>
+            <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.usuario.nome}</td>
+            <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.usuario.email}</td>
+            <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.status == 1 ? `Ativo ${sucesso}` : `Inativo ${erro}`}</td>
+            
+          </tr>`,
+        )}
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  `,
+      showConfirmButton: false,
+
+      didOpen: () => {
+        document
+          .getElementById("btnNovoAluno")
+          .addEventListener("click", () => {
+            Swal.fire({
+              title: "Novo Aluno",
+              input: "text",
+              inputLabel: "Nome do aluno",
+              showCancelButton: true,
+            });
+          });
       },
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await Api.CallEndpoint("Modulos", "POST", {
-            treinamento_id: result.value.treinamento,
-            nome: result.value.nome,
-          });
-          Swal.fire({
-            icon: "success",
-            title: "Modulo criado!",
-            text: "O modulo foi criado com sucesso.",
-          });
-          carregarTreinamentos();
-        } catch (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Erro",
-            text: error.message,
-          });
-        }
-      }
     });
   }
-
-  useEffect(() => {
-    carregarTreinamentos();
-  }, []);
-
   const salvar = async (e) => {
     e.preventDefault();
 
@@ -169,191 +316,76 @@ export default function TreinamentoCreate() {
       return;
     }
 
-    const metodo = editar ? "PUT" : "POST";
+    const res = editar
+      ? await Api.CallEndpoint("Treinamento", "PUT", { nome }, id)
+      : await Api.CallEndpoint("Treinamento", "POST", { nome });
 
-    switch (metodo) {
-      case "POST":
-        const res1 = await Api.CallEndpoint("Treinamento", "POST", { nome });
+    if (res) {
+      Swal.fire({
+        icon: "success",
+        title: editar ? "Treinamento atualizado!" : "Treinamento criado!",
+        text: editar
+          ? "O treinamento foi atualizado com sucesso."
+          : "O treinamento foi criado com sucesso.",
+      });
 
-        if (res1) {
-          Swal.fire({
-            icon: "success",
-            title: "Treinamento criado!",
-            text: "O treinamento foi criado com sucesso.",
-          });
-          carregarTreinamentos();
-          e.target.reset();
-
-          setEditar(false);
-          setId(null);
-        }
-
-        break;
-      case "PUT":
-        const res2 = await Api.CallEndpoint("Treinamento", "PUT", { nome }, id);
-
-        if (res2) {
-          Swal.fire({
-            icon: "success",
-            title: "Treinamento atualizado!",
-            text: "O treinamento foi atualizado com sucesso.",
-          });
-          carregarTreinamentos();
-          e.target.reset();
-
-          setEditar(false);
-          setId(null);
-        }
-
-        break;
+      carregarTreinamentos();
+      e.target.reset();
+      setEditar(false);
+      setId(null);
     }
   };
+
+  useEffect(() => {
+    carregarTreinamentos();
+  }, []);
 
   return (
     <>
       <div className="training-layout">
-        <aside className="training-sidebar">
-          <div className="sidebar-header">
-            <h5>Treinamentos</h5>
-
-            <button
-              className="btn btn-accent"
-              onClick={() => novoTreinamento()}
-            >
-              + Treinamento
-            </button>
-          </div>
-
-          <div className="tree">
-            {treinamentos.map((treinamento) => (
-              <div key={treinamento.id} className="tree-item">
-                <div
-                  className="tree-training"
-                  onClick={() => openEditTreinamento(treinamento)}
-                >
-                  📚 {treinamento.nome}
-                </div>
-
-                {treinamento.modulos?.map((modulo) => (
-                  <div key={modulo.id} className="tree-module">
-                    <div key={modulo.id} onClick={() => abrirModulo(modulo.id)}>
-                      📁 {modulo.nome}
-                    </div>
-
-                    {modulo.aulas?.map((aula) => (
-                      <div
-                        key={aula.id}
-                        className="tree-lesson"
-                        onClick={() => abrirAula(aula.id)}
-                      >
-                        🎬 {aula.nome}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </aside>
+        <TreinamentoSidebar
+          treinamentos={treinamentos}
+          novoTreinamento={novoTreinamento}
+          openEditTreinamento={openEditTreinamento}
+          abrirModulo={abrirModulo}
+          abrirAula={abrirAula}
+        />
 
         <main className="training-content">
-          <div className="form-card">
-            <h3>{editar ? "Editar Treinamento" : "Novo Treinamento"}</h3>
+          {!moduloSelecionado && (
+            <TreinamentoForm
+              salvar={salvar}
+              nome={nome}
+              setNome={setNome}
+              editar={editar}
+              treinamentoSelecionado={treinamentoSelecionado}
+              excluirTreinamento={excluirTreinamento}
+              informacoesTreinamento={informacoesTreinamento}
+            />
+          )}
 
-            <form onSubmit={salvar}>
-              <input
-                className="form-control mb-3"
-                placeholder="Nome do treinamento"
-                name="nome"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
-              />
+          {treinamentoSelecionado && !moduloSelecionado && (
+            <ModulosTabela
+              treinamentoSelecionado={treinamentoSelecionado}
+              novoModulo={novoModulo}
+              excluirModulo={excluirModulo}
+            />
+          )}
 
-              <div className="d-flex gap-2">
-
-                <button className="btn btn-outline-training" type="submit">
-                  {editar ? "Editar" : "Salvar"}
-                </button>
-
-                {editar && (
-                  <div className="ms-auto">
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={excluirTreinamento}
-                    >
-                      Excluir Treinamento
-                    </button>
-                  </div>
-                )}
-              </div>
-            </form>
-          </div>
-
-          {treinamentoSelecionado && (
-            <div className="form-card mt-4">
-              <div className="d-flex justify-content-between align-items-center mb-3">
-                <h4 className="mb-0">
-                  Modulos Cadastrados Em {treinamentoSelecionado.nome}
-                </h4>
-
-                <button
-                  type="button"
-                  className="btn btn-success btn-sm "
-                  onClick={() => novoModulo(treinamentoSelecionado)}
-                >
-                  + Novo Módulo
-                </button>
-              </div>
-
-              <table className="table table-striped table-hover align-middle">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Aulas</th>
-                    <th width="180">Ações</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {treinamentoSelecionado.modulos?.length > 0 ? (
-                    treinamentoSelecionado.modulos.map((modulo) => (
-                      <tr key={modulo.id}>
-                        <td>{modulo.id}</td>
-
-                        <td>{modulo.nome}</td>
-
-                        <td>{modulo.aulas?.length || 0}</td>
-
-                        <td>
-                          <button
-                            type="button"
-                            className="btn btn-primary btn-sm me-2"
-                          >
-                            Editar
-                          </button>
-
-                          <button
-                            type="button"
-                            className="btn btn-danger btn-sm"
-                            onClick={() => excluirModulo(modulo.id)}
-                          >
-                            Excluir
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="4" className="text-center">
-                        Nenhum módulo cadastrado
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+          {moduloSelecionado && (
+            <AbrirModulo
+              abrirModulo={abrirModulo}
+              id={moduloSelecionado.modulo.id}
+              moduloSelecionado={moduloSelecionado}
+              novaAula={novaAula}
+              excluirAula={excluirAula}
+            />
+          )}
+          {aulanova && moduloSelecionado && (
+            <NovaAulaForm
+              moduloSelecionado={moduloSelecionado}
+              criarnovaaula={criarnovaaula}
+            />
           )}
         </main>
       </div>

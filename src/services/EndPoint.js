@@ -1,13 +1,15 @@
 import Swal from "sweetalert2";
 
 
+
+
+
 class Api {
 
 
     static async CallEndpoint(setor, method, body = null, id = null) {
 
         const token = localStorage.getItem('token');
-
 
         const options = {
             method,
@@ -26,10 +28,7 @@ class Api {
         if (id !== null) {
             url += `/${id}`;
         }
-
         const response = await fetch(url, options);
-
-
 
         if (response.status === 400) {
             const erro = await response.json();
@@ -58,8 +57,11 @@ class Api {
             );
         }
 
+        if (response.status === 401) {
+            localStorage.clear();
+            throw new Error('Sua sessão expirou, faca login novamente.');
 
-
+        }
 
         if (!response.ok) {
             const erro = await response.json();
@@ -71,14 +73,14 @@ class Api {
                 };
             }
 
-            if (response.status == 401) {
-                throw new Error('Senha ou login incorretos.');
-            }
         }
+
 
         return await response.json();
     }
 
 }
+
+
 
 export default Api;

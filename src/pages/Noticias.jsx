@@ -7,6 +7,7 @@ import "../css/Noticias.css";
 export default function Noticias() {
   const [noticias, setNoticias] = useState([]);
   const [vagas, setVagas] = useState([]);
+  const [selecao, setSelecao] = useState([]);
 
   const itens = [
     ...noticias.map((n) => ({
@@ -22,6 +23,65 @@ export default function Noticias() {
   useEffect(() => {
     carregarNoticias();
   }, []);
+
+  const toggleSelecao = (id) => {
+    setSelecao((prev) =>
+      prev.includes(id)
+        ? prev.filter((itemId) => itemId !== id)
+        : [...prev, id],
+    );
+  };
+  const selecionarTodos = () => {
+    if (selecao.length === noticias.length) {
+      setSelecao([]); // já estão todos selecionados -> desmarca tudo
+    } else {
+      setSelecao(noticias.map((item) => item.id)); // marca todos
+    }
+  };
+  const excluirSelecionados = async () => {
+    if (selecao.length === 0) {
+      Swal.fire({
+        icon: "info",
+        title: "Nenhum item selecionado",
+        text: "Selecione ao menos uma notícia para excluir.",
+      });
+      return;
+    }
+
+    const confirmacao = await Swal.fire({
+      icon: "warning",
+      title: `Excluir ${selecao.length} notícia(s)?`,
+      text: "Essa ação não pode ser desfeita.",
+      showCancelButton: true,
+      confirmButtonText: "Sim, excluir",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (!confirmacao.isConfirmed) return;
+
+    try {
+      // dispara todas as exclusões em paralelo
+      await Promise.all(
+        selecao.map((id) => Api.CallEndpoint("Noticia", "DELETE", null, id)),
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Excluído!",
+        text: "As notícias selecionadas foram excluídas.",
+      });
+
+      setSelecao([]);
+      carregarNoticias();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: "Não foi possível excluir uma ou mais notícias.",
+      });
+      setSelecao([]);
+    }
+  };
 
   async function carregarNoticias() {
     try {
@@ -547,18 +607,41 @@ export default function Noticias() {
         <div className="d-flex justify-content-end mb-4">
           {(localStorage.getItem("tipo") == 2 ||
             localStorage.getItem("tipo") == 3) && (
-            <>
-              <button className="btn btn-success me-4" onClick={openAdd}>
-                Adicionar Notícia
+            <div className="btn-group" role="group">
+              <button className="btn btn-success" onClick={openAdd}>
+                <i className="fas fa-newspaper me-2"></i>
+                Notícia
               </button>
+
               <button className="btn btn-warning" onClick={openAddVaga}>
-                Adicionar Vaga
+                <i className="fas fa-briefcase me-2"></i>
+                Vaga
               </button>
-            </>
+
+              <button
+                className="btn btn-danger"
+                disabled={selecao.length === 0}
+                onClick={excluirSelecionados}
+              >
+                <i className="fas fa-trash me-2"></i>
+                Excluir ({selecao.length})
+              </button>
+
+              <button
+                className="btn btn-outline-secondary"
+                onClick={selecionarTodos}
+              >
+                <i className="fas fa-check-square me-2"></i>
+                {selecao.length === noticias.length
+                  ? "Desmarcar"
+                  : "Selecionar"}
+              </button>
+            </div>
           )}
         </div>
       </div>
 
+      
       <div className="row g-4">
         {itens.length > 0 ? (
           itens.map((item) => (
@@ -570,7 +653,37 @@ export default function Noticias() {
               }}
             >
               <div className="card h-100 shadow-sm">
-                <div className="card-body">
+                <div
+                  className="card-body"
+                  onDoubleClick={() =>
+                    localStorage?.getItem("tipo") >= 2
+                      ? item.tipo === "noticia"
+                        ? toggleSelecao(item.id)
+                        : inscricao(item)
+                      : null
+                  }
+                  onContextMenu={(e) => {
+                    if (localStorage?.getItem("tipo") >= 2) {
+                      e.preventDefault();
+                      console.log("Botão direito");
+                      item.tipo === "noticia"
+                        ? openEditnoticia(item)
+                        : openEditVaga(item);
+                    }
+                  }}
+                >
+                  {item.tipo === "noticia" && (
+                    <div className="form-check mb-2">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        checked={selecao.includes(item.id)}
+                        onChange={() => toggleSelecao(item.id)}
+                      />
+                      <label className="form-check-label">Selecionar</label>
+                    </div>
+                  )}
+
                   <span
                     className={`badge mb-2 ${item.tipo === "noticia" ? "bg-primary" : "bg-success"}`}
                   >

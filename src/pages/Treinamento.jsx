@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Swal from "sweetalert2";
 
+
 import "../css/Treinamento.css";
 export default function Treinamento() {
     const tipo = localStorage.getItem('tipo');
@@ -16,7 +17,7 @@ export default function Treinamento() {
         try {
             if (tipo == 1) {
                 const response = await Api.CallEndpoint(
-                    'UseTreinamentos/Usuario',
+                    'Matriculas/Usuario',
                     'GET',
                     null,
                     localStorage.getItem('id')
@@ -26,7 +27,7 @@ export default function Treinamento() {
                 return;
             }
             const response1 = await Api.CallEndpoint(
-                'UseTreinamentos/Usuario',
+                'Matriculas/Usuario',
                 'GET',
                 null,
                 localStorage.getItem('id')
@@ -110,7 +111,7 @@ export default function Treinamento() {
                     <div className="mb-4 d-flex justify-content-between align-items-center">
                         <h2>Treinamentos</h2>
                     <Link to="/CriarTreinamento">
-                        <button className="btn btn-accent" >
+                        <button className="btn btn-outline-success" >
                             Novo Treinamento
                         </button>
                     </Link>
@@ -135,8 +136,13 @@ export default function Treinamento() {
                                     </div>
 
                                     <div className="card-footer">
-                                        <button className="btn btn-outline">
-                                            Acessar
+                                        <Link to={`/criarTreinamento`}>
+                                        <button className="btn btn-outline-info">
+                                            Editar
+                                        </button>
+                                        </Link>
+                                         <button className="btn btn-outline ms-2">
+                                            Cadastrados
                                         </button>
                                     </div>
                                 </div>
