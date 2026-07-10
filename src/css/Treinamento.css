@@ -1,118 +1,264 @@
 @import url('../styles/theme.css');
 
 .treinamento-page {
-    background: var(--color-background);
-    color: var(--color-muted);
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
+    background: var(--bg-page);
+    background-image: var(--dot-grid);
+    background-size: var(--dot-grid-size);
+    color: var(--text-secondary);
+    padding: 48px !important;
+    min-height: 320px;
 }
 
-/* Aproxima as seções */
+.treinamento-page:last-of-type {
+    min-height: 40vh;
+}
+
+/* aproxima as duas seções sem cortar o fundo em pontilhado */
 .treinamento-page + .treinamento-page {
-    padding-top: 0 !important;
-    margin-top: -10px;
+    padding-top: 8px !important;
+    margin-top: -8px;
 }
 
-/* Título */
+/* ---------- Header da seção ---------- */
+
+.treinamento-page .mb-4 {
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .treinamento-page h2 {
-    color: #1f2937;
+    position: relative;
+    color: var(--text-primary);
     font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
     margin-bottom: 0;
+    padding-left: 16px;
 }
 
-/* Botão principal */
-.btn-accent {
-    background: var(--color-accent);
-    color: #06201c;
+.treinamento-page h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 3px;
+    bottom: 3px;
+    width: 4px;
+    border-radius: 4px;
+    background: var(--gradient-primary-vertical);
+}
+
+/* ---------- Botão principal ---------- */
+
+.treinamento-page .btn-outline-success {
+    background: var(--gradient-primary);
+    color: var(--text-primary);
     font-weight: 600;
     border: none;
-    border-radius: var(--radius);
-    padding: 10px 16px;
-    box-shadow: var(--shadow);
-    transition: all 0.25s ease;
+    border-radius: var(--radius-sm);
+    padding: 10px 18px;
+    font-size: 14px;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
-/* BOTÃO principal */
-.treinamento-page .btn-accent {
-  background: var(--color-accent);
-  color: #06201c;
-  font-weight: 600;
-  border-radius: var(--radius);
-  padding: 10px 16px;
-  box-shadow: var(--shadow);
-  transition: 0.2s;
+.treinamento-page .btn-outline-success:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-primary);
+    color: var(--text-primary);
 }
 
-.treinamento-page .btn-accent:hover {
-  filter: brightness(1.05);
-  transform: translateY(-2px);
+/* ---------- Grid ---------- */
+
+.treinamento-page .row {
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* CARD */
+/* ---------- Card ---------- */
+
 .treinamento-page .training-card {
-  background: var(--color-surface);
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: 0.25s ease;
-  overflow: hidden;
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(var(--blur-glass));
+    -webkit-backdrop-filter: blur(var(--blur-glass));
+    overflow: hidden;
+    transition: var(--transition-card);
+}
+
+.treinamento-page .training-card::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    opacity: 0.1;
+    filter: blur(50px);
+    transition:
+        opacity var(--transition-normal),
+        transform var(--transition-normal);
+    pointer-events: none;
 }
 
 .treinamento-page .training-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(45, 212, 191, 0.3);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    transform: translateY(-6px);
+    border-color: rgba(70, 171, 229, 0.4);
+    background: var(--bg-card-hover);
 }
 
-/* BODY */
+.treinamento-page .training-card:hover::before {
+    opacity: 0.2;
+    transform: scale(1.15);
+}
+
+/* ---------- Body ---------- */
+
 .treinamento-page .card-body {
-  padding: 18px;
+    position: relative;
+    z-index: 1;
+    padding: 22px 20px 16px;
 }
 
-/* Título card */
 .treinamento-page .card-title {
-  color: #111827;
-  font-weight: 700;
-  margin-top: 8px;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-top: 10px;
+    letter-spacing: -0.01em;
 }
 
-/* Texto */
 .treinamento-page .card-text {
-  color: var(--color-muted);
-  font-size: 0.92rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0;
 }
 
-/* BADGE nível */
+/* ---------- Badge ---------- */
+
 .treinamento-page .badge-level {
-  background: rgba(45, 212, 191, 0.12);
-  color: var(--color-accent);
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
+    position: relative;
+    z-index: 1;
+    background: rgba(70, 171, 229, 0.14);
+    border: 1px solid rgba(70, 171, 229, 0.3);
+    color: var(--color-primary);
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
 }
 
-/* FOOTER */
+/* ---------- Footer ---------- */
+
 .treinamento-page .card-footer {
-  background: transparent;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
-  padding: 12px 16px;
-  display: flex;
-  justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
 }
 
-/* botão outline */
+/* ---------- Botão Outline ---------- */
+
 .treinamento-page .btn-outline {
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-  background: transparent;
-  border-radius: 10px;
-  padding: 6px 12px;
-  font-weight: 600;
-  transition: 0.2s;
+    border: 1px solid rgba(70, 171, 229, 0.4);
+    color: var(--color-primary);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    padding: 7px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
 }
 
 .treinamento-page .btn-outline:hover {
-  background: var(--color-accent);
-  color: #06201c;
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #06201c;
+}
+
+/* ---------- Botão Secundário ---------- */
+
+.treinamento-page .btn-outline-info {
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    padding: 7px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.treinamento-page .btn-outline-info:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--text-primary);
+}
+
+/* ---------- Estado vazio ---------- */
+
+.training-empty {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 56px 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-soft);
+    border-radius: var(--radius-md);
+}
+
+.training-empty-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    opacity: 0.6;
+}
+
+.training-empty h5 {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0 0 6px;
+}
+
+.training-empty p {
+    color: var(--text-disabled);
+    font-size: 13.5px;
+    margin: 0;
+    max-width: 340px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+    .treinamento-page {
+        padding: 32px 20px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .treinamento-page .training-card {
+        transition: none;
+    }
 }

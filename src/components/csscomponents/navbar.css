@@ -1,0 +1,183 @@
+@import url('../../styles/theme.css');
+
+:root {
+    --nav-cyan: #46abe5;
+    --nav-azul: #2f6fed;
+}
+
+/* ---------- Navbar container ---------- */
+
+.navbar.bg-dark {
+    background: rgba(11, 14, 26, 0.75) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 14px;
+    padding-bottom: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* ---------- Brand ---------- */
+
+.navbar-brand {
+    position: relative;
+    letter-spacing: 0.02em;
+    background: linear-gradient(135deg, #ffffff, var(--nav-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: filter 0.2s ease;
+}
+
+.navbar-brand:hover {
+    filter: brightness(1.2);
+}
+
+/* ---------- Toggler (mobile) ---------- */
+
+.navbar-toggler {
+    box-shadow: none !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+/* ---------- Links ---------- */
+
+.navbar-nav .nav-link {
+    position: relative;
+    font-size: 14.5px;
+    padding: 8px 4px !important;
+    opacity: 0.82;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 2px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--nav-cyan), var(--nav-azul));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    opacity: 1;
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* link ativo (rota atual) — funciona se você usar NavLink com a classe "active" do react-router */
+.navbar-nav .nav-link.active {
+    opacity: 1;
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* remove a seta padrão do bootstrap e adiciona uma mais discreta */
+.navbar-nav .dropdown-toggle::after {
+    vertical-align: 1px;
+    opacity: 0.6;
+    transition: transform 0.2s ease;
+}
+
+.navbar-nav .dropdown:hover .dropdown-toggle::after,
+.navbar-nav .dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* ---------- Dropdown menu ---------- */
+
+.dropdown-menu {
+    background: rgba(17, 20, 34, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 10px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    animation: dropdownIn 0.18s ease;
+}
+
+@keyframes dropdownIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 9px 14px;
+    border-radius: 8px;
+    transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    padding-left: 18px;
+}
+
+/* item "Sair" com leve destaque de saída */
+.dropdown-item.text-danger,
+.dropdown-menu button.dropdown-item:last-child {
+    color: #f27272;
+}
+
+.dropdown-menu button.dropdown-item:last-child:hover {
+    background: rgba(239, 93, 93, 0.1);
+    color: #ff8a8a;
+}
+
+/* ---------- Responsive (mobile collapse) ---------- */
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .navbar-nav .nav-link::after {
+        display: none;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 4px !important;
+    }
+
+    .dropdown-menu {
+        background: rgba(255, 255, 255, 0.03);
+        border: none;
+        box-shadow: none;
+        margin-top: 4px !important;
+        margin-left: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar-nav .nav-link::after,
+    .dropdown-menu {
+        transition: none;
+        animation: none;
+    }
+}

@@ -1,21 +1,14 @@
 import Swal from "sweetalert2";
 
-
-
-
-
 class Api {
-
-
     static async CallEndpoint(setor, method, body = null, id = null) {
-
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
 
         const options = {
             method,
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             }
         };
 
@@ -28,59 +21,77 @@ class Api {
         if (id !== null) {
             url += `/${id}`;
         }
-        const response = await fetch(url, options);
 
-        if (response.status === 400) {
-            const erro = await response.json();
-            throw new Error(`Erro ${response.status}: ${erro.message}`);
-        }
+        try {
+            // Inicia o loading global
+            window.dispatchEvent(new Event("loading:start"));
 
+            const response = await fetch(url, options);
 
-        if (response.status === 204) {
-            return null;
-        }
-        if (response.status === 403) {
-            let erro = {};
-
-            try {
-                erro = await response.json();
-            } catch {
-                // resposta sem corpo
+            if (response.status === 204) {
+                return null;
             }
 
-            if (erro?.message?.includes('Nenhuma licença atribuída ao usuário.')) {
-                throw new Error('Você não possui uma licença ativa.');
+            if (response.status === 400) {
+                const erro = await response.json();
+                throw new Error(erro.message);
             }
 
-            throw new Error(
-                erro?.message || 'Você não tem permissão para realizar esta operação.'
-            );
-        }
+            if (response.status === 401) {
+                localStorage.clear();
 
-        if (response.status === 401) {
-            localStorage.clear();
-            throw new Error('Sua sessão expirou, faca login novamente.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Sessão expirada",
+                    text: "Faça login novamente."
+                });
 
-        }
-
-        if (!response.ok) {
-            const erro = await response.json();
-
-            if (erro.message.includes('aceite os Termos para prosseguir')) {
-                return {
-                    termosPendentes: true,
-                    mensagem: erro.message
-                };
+                window.location.href = "/";
+                return;
             }
 
+            if (response.status === 403) {
+                let erro = {};
+
+                try {
+                    erro = await response.json();
+                } catch {}
+
+                throw new Error(
+                    erro?.message ||
+                    "Você não tem permissão para realizar esta operação."
+                );
+            }
+
+            if (!response.ok) {
+                const erro = await response.json();
+
+                if (
+                    erro?.message?.includes(
+                        "aceite os Termos para prosseguir"
+                    )
+                ) {
+                    return {
+                        termosPendentes: true,
+                        mensagem: erro.message
+                    };
+                }
+
+                throw new Error(
+                    erro?.message || "Erro ao processar solicitação."
+                );
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+
+            throw error;
+        } finally {
+            // Finaliza o loading global
+            window.dispatchEvent(new Event("loading:end"));
         }
-
-
-        return await response.json();
     }
-
 }
-
-
 
 export default Api;
