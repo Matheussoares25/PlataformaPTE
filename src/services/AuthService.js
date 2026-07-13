@@ -55,7 +55,9 @@ class Api {
                 erro?.message || 'Você não tem permissão para realizar esta operação.'
             );
         }
-
+        if (response.status === 404) {
+            throw new Error('Usaurio não cadastrado');
+        }
 
 
 
@@ -73,9 +75,9 @@ class Api {
                 throw new Error('Senha ou login incorretos.');
             }
 
-                    if (response.status === 401) {
-            throw new Error('Sua sessão expirou, faca login novamente.');
-        }
+            if (response.status === 401) {
+                throw new Error('Sua sessão expirou, faca login novamente.');
+            }
 
 
         }
