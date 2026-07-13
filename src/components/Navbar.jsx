@@ -53,7 +53,7 @@ function Navbar() {
 
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to="/desempenho">
+                    <Link className="dropdown-item" to="/Dashboard">
                       Dashboard
                     </Link>
                   </li>

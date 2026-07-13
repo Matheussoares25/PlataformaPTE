@@ -224,7 +224,6 @@ export default function TreinamentoCreate() {
   };
 
   async function informacoesTreinamento() {
-    // /api/UseTreinamentos/treinamento/{treinamentoId}
 
     const response = await Api.CallEndpoint(
       "Matriculas/treinamento",
@@ -272,15 +271,15 @@ export default function TreinamentoCreate() {
           </tr>
         </thead>
         ${response.map(
-          (aluno) =>
-            `<tr>
+        (aluno) =>
+          `<tr>
             <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.usuario.id}</td>
             <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.usuario.nome}</td>
             <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.usuario.email}</td>
             <td style="border-bottom:1px solid #ddd; padding:10px;">${aluno.status == 1 ? `Ativo ${sucesso}` : `Inativo ${erro}`}</td>
             
           </tr>`,
-        )}
+      )}
         <tbody>
         </tbody>
       </table>
@@ -291,13 +290,27 @@ export default function TreinamentoCreate() {
       didOpen: () => {
         document
           .getElementById("btnNovoAluno")
-          .addEventListener("click", () => {
-            Swal.fire({
-              title: "Novo Aluno",
-              input: "text",
-              inputLabel: "Nome do aluno",
-              showCancelButton: true,
+          .addEventListener("click", async () => {
+            const response = await Api.CallEndpoint("Usuarios", "GET");
+            const usuarios = await response.json();
+
+            const opcoes = {};
+
+            usuarios.forEach(usuario => {
+              opcoes[usuario?.id] = usuario.nome;
             });
+
+            const { value: usuarioId } = await Swal.fire({
+              title: "Nova matrícula de aluno",
+              input: "select",
+              inputOptions: opcoes,
+              inputPlaceholder: "Selecione um aluno",
+              showCancelButton: true,
+              confirmButtonText: "Matricular",
+              cancelButtonText: "Cancelar"
+            });
+
+
           });
       },
     });

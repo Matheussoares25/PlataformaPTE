@@ -1,0 +1,401 @@
+@import url('../styles/theme.css');
+
+:root {
+    --db-cyan: #46abe5;
+    --db-blue: #2f6fed;
+    --db-amber: #f5a623;
+    --db-emerald: #22c58b;
+    --db-red: #e5484d;
+    --db-indigo: #4338ca;
+    --db-green: #22c55e;
+    --db-crimson: #dc2f4e;
+    --db-orange: #ea7c2b;
+    --db-pink: #d6409f;
+}
+
+.dashboard-page {
+    position: relative;
+    min-height: 100vh;
+    background: #0b0e1a;
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 28px 28px;
+    padding: 48px 24px 64px;
+    overflow: hidden;
+}
+
+.dashboard-glow-a,
+.dashboard-glow-b {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.dashboard-glow-a {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    left: -100px;
+    background: rgba(70, 171, 229, 0.16);
+}
+
+.dashboard-glow-b {
+    width: 380px;
+    height: 380px;
+    bottom: -100px;
+    right: -80px;
+    background: rgba(47, 111, 237, 0.14);
+}
+
+/* ---------- Header ---------- */
+
+.dashboard-header {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.dashboard-eyebrow {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-cyan);
+    margin: 0 0 6px;
+}
+
+/* ---------- KPIs ---------- */
+
+.dashboard-kpis {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.kpi-card {
+    --kpi-accent: var(--db-cyan);
+    position: relative;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: var(--kpi-accent);
+    opacity: 0.12;
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.kpi-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--kpi-accent) 50%, transparent);
+}
+
+/* combinado com .kpi-card garante que a cor sempre vence, não importa a ordem no arquivo */
+.kpi-card.kpi-red     { --kpi-accent: var(--db-red); }
+.kpi-card.kpi-amber   { --kpi-accent: var(--db-amber); }
+.kpi-card.kpi-indigo  { --kpi-accent: var(--db-indigo); }
+.kpi-card.kpi-green   { --kpi-accent: var(--db-green); }
+.kpi-card.kpi-cyan    { --kpi-accent: var(--db-cyan); }
+.kpi-card.kpi-crimson { --kpi-accent: var(--db-crimson); }
+.kpi-card.kpi-orange  { --kpi-accent: var(--db-orange); }
+.kpi-card.kpi-pink    { --kpi-accent: var(--db-pink); }
+.kpi-card.kpi-emerald { --kpi-accent: var(--db-emerald); }
+.kpi-card.kpi-blue    { --kpi-accent: var(--db-blue); }
+
+.kpi-icon {
+    position: relative;
+    z-index: 1;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--kpi-accent) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--kpi-accent) 40%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--kpi-accent);
+    font-size: 17px;
+}
+
+.kpi-label {
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12.5px;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.kpi-value {
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+/* ---------- Painéis (gráfico + ranking) ---------- */
+
+.dashboard-grid {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dashboard-panel {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 24px;
+}
+
+.dashboard-panel.span-2 {
+    grid-column: span 2;
+}
+
+.panel-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.panel-header h5 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0;
+}
+
+.panel-sub {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12.5px;
+}
+
+/* ---------- Gráfico de barras (CSS puro) ---------- */
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    height: 200px;
+    padding-top: 10px;
+}
+
+.bar-chart-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    gap: 8px;
+}
+
+.bar-chart-track {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.bar-chart-fill {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(180deg, var(--db-cyan), var(--db-blue));
+    transition: height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bar-chart-label {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ---------- Ranking ---------- */
+
+.ranking-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 8px;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.ranking-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.ranking-position {
+    width: 28px;
+    color: var(--db-cyan);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.ranking-name {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ranking-score {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+/* ---------- Estado vazio ---------- */
+
+.training-empty {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 56px 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+}
+
+.training-empty-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    opacity: 0.6;
+}
+
+.training-empty h5 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0 0 6px;
+}
+
+.training-empty p {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 13.5px;
+    margin: 0;
+    max-width: 340px;
+}
+
+/* ---------- Legenda ---------- */
+
+.chart-legend {
+    display: flex;
+    gap: 16px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot-cyan { background: var(--db-cyan); }
+.legend-dot-blue { background: var(--db-blue); }
+
+@media (prefers-reduced-motion: reduce) {
+    .dual-bar {
+        transition: none;
+    }
+}
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+    .dashboard-kpis {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .dashboard-kpis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-panel.span-2 {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-kpis {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kpi-card,
+    .bar-chart-fill {
+        transition: none;
+    }
+}
