@@ -602,24 +602,24 @@ export default function Noticias() {
 
   return (
     <div className="noticias-page p-5">
-      <div className=" mb-4">
+      <div className="mb-4">
         <h2 className="card-title">Notícias e Vagas</h2>
         <div className="d-flex justify-content-end mb-4">
           {(localStorage.getItem("tipo") == 2 ||
             localStorage.getItem("tipo") == 3) && (
-            <div className="btn-group" role="group">
-              <button className="btn btn-success" onClick={openAdd}>
+            <div className="toolbar-group" role="group">
+              <button className="btn-pill btn-pill-primary" onClick={openAdd}>
                 <i className="fas fa-newspaper me-2"></i>
                 Notícia
               </button>
 
-              <button className="btn btn-warning" onClick={openAddVaga}>
+              <button className="btn-pill btn-pill-amber" onClick={openAddVaga}>
                 <i className="fas fa-briefcase me-2"></i>
                 Vaga
               </button>
 
               <button
-                className="btn btn-danger"
+                className="btn-pill btn-pill-danger"
                 disabled={selecao.length === 0}
                 onClick={excluirSelecionados}
               >
@@ -628,7 +628,7 @@ export default function Noticias() {
               </button>
 
               <button
-                className="btn btn-outline-secondary"
+                className="btn-pill btn-pill-ghost"
                 onClick={selecionarTodos}
               >
                 <i className="fas fa-check-square me-2"></i>
@@ -641,7 +641,6 @@ export default function Noticias() {
         </div>
       </div>
 
-      
       <div className="row g-4">
         {itens.length > 0 ? (
           itens.map((item) => (
@@ -652,7 +651,7 @@ export default function Noticias() {
                 opacity: item.tipo === "vaga" ? (item.ativa ? 1 : 0.5) : 1,
               }}
             >
-              <div className="card h-100 shadow-sm">
+              <div className="card noticia-card h-100">
                 <div
                   className="card-body"
                   onDoubleClick={() =>
@@ -672,23 +671,25 @@ export default function Noticias() {
                     }
                   }}
                 >
-                  {item.tipo === "noticia" && (
-                    <div className="form-check mb-2">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        checked={selecao.includes(item.id)}
-                        onChange={() => toggleSelecao(item.id)}
-                      />
-                      <label className="form-check-label">Selecionar</label>
-                    </div>
-                  )}
+                  <div className="noticia-card-top">
+                    {item.tipo === "noticia" && (
+                      <div className="form-check noticia-checkbox">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          checked={selecao.includes(item.id)}
+                          onChange={() => toggleSelecao(item.id)}
+                        />
+                        <label className="form-check-label">Selecionar</label>
+                      </div>
+                    )}
 
-                  <span
-                    className={`badge mb-2 ${item.tipo === "noticia" ? "bg-primary" : "bg-success"}`}
-                  >
-                    {item.tipo === "noticia" ? "Notícia" : "Vaga"}
-                  </span>
+                    <span
+                      className={`badge-tag ${item.tipo === "noticia" ? "badge-tag-blue" : "badge-tag-green"}`}
+                    >
+                      {item.tipo === "noticia" ? "Notícia" : "Vaga"}
+                    </span>
+                  </div>
 
                   <h5 className="card-title">{item.titulo}</h5>
 
@@ -702,11 +703,11 @@ export default function Noticias() {
                     </>
                   )}
                 </div>
-                <div className="card-footer d-flex justify-content-end">
+                <div className="card-footer d-flex justify-content-end gap-2">
                   {(localStorage.getItem("tipo") == 2 ||
                     localStorage.getItem("tipo") == 3) && (
                     <button
-                      className="btn btn-primary"
+                      className="btn-pill btn-pill-primary"
                       onClick={() =>
                         item.tipo === "noticia"
                           ? openEditnoticia(item)
@@ -718,7 +719,7 @@ export default function Noticias() {
                   )}
                   {localStorage.getItem("tipo") == 3 && (
                     <button
-                      className="btn btn-danger"
+                      className="btn-pill btn-pill-danger"
                       onClick={() =>
                         item.tipo === "noticia"
                           ? openDeletenoticia(item)
@@ -730,7 +731,7 @@ export default function Noticias() {
                   )}
                   {item.tipo === "vaga" && item.ativa && (
                     <button
-                      className="btn btn-success"
+                      className="btn-pill btn-pill-success"
                       onClick={() => inscricao(item)}
                     >
                       Inscrever-se
@@ -742,9 +743,11 @@ export default function Noticias() {
           ))
         ) : (
           <div className="col-12">
-            <p className="text-center  card-text">
-              Nenhum registro encontrado.
-            </p>
+            <div className="training-empty">
+              <div className="training-empty-icon">📰</div>
+              <h5>Nenhum registro encontrado</h5>
+              <p>Assim que houver notícias ou vagas, elas aparecem aqui.</p>
+            </div>
           </div>
         )}
       </div>
