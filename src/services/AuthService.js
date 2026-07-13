@@ -75,9 +75,9 @@ class Api {
                 throw new Error('Senha ou login incorretos.');
             }
 
-            if (response.status === 401) {
-                throw new Error('Sua sessão expirou, faca login novamente.');
-            }
+                    if (response.status === 401) {
+            throw new Error('Sua sessão expirou, faca login novamente.');
+        }
 
 
         }
