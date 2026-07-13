@@ -158,7 +158,7 @@ function Home() {
 
         {(tipo == 2 || tipo == 3) && (
           <Link
-            to="/desempenho"
+            to="/Dashboard"
             className="menuOption card-rose span-2"
             data-aos="fade-left"
           >
