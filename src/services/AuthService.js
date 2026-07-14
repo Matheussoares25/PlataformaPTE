@@ -22,7 +22,7 @@ class Api {
             options.body = JSON.stringify(body);
         }
 
-        let url = `https://localhost:7284/api/${setor}`;
+        let url = `https://apipte-production.up.railway.app/api/${setor}`;
 
         if (id !== null) {
             url += `/${id}`;
@@ -75,9 +75,9 @@ class Api {
                 throw new Error('Senha ou login incorretos.');
             }
 
-            if (response.status === 401) {
-                throw new Error('Sua sessão expirou, faca login novamente.');
-            }
+                    if (response.status === 401) {
+            throw new Error('Sua sessão expirou, faca login novamente.');
+        }
 
 
         }

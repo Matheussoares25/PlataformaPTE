@@ -64,7 +64,7 @@ function Home() {
         <div className="offcanvas-body">
           <div className="offcanvas-menu">
             <Link
-              to="/perfil"
+              to="/Perfil"
               className="offcanvas-menu-item"
               data-bs-dismiss="offcanvas"
             >
@@ -80,11 +80,11 @@ function Home() {
             </Link>
 
             <Link
-              to="/certificados"
+              to="/Perfil"
               className="offcanvas-menu-item"
               data-bs-dismiss="offcanvas"
             >
-              <span>Certificados</span>
+              <span>Certificadosss</span>
             </Link>
 
             <Link
@@ -125,7 +125,7 @@ function Home() {
         </Link>
 
         <Link
-          to="/certificados"
+          to="/Perfil"
           className="menuOption card-amber"
           data-aos="fade-left"
         >
@@ -158,7 +158,7 @@ function Home() {
 
         {(tipo == 2 || tipo == 3) && (
           <Link
-            to="/desempenho"
+            to="/Dashboard"
             className="menuOption card-rose span-2"
             data-aos="fade-left"
           >
