@@ -4,11 +4,11 @@ import Api from "../../services/EndPoint";
 import { useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { erro, sucesso } from "../../components/icones";
-import TreinamentoSidebar from "../../components/CriaTComponentes/TreinamentoSideBar";
-import TreinamentoForm from "../../components/CriaTComponentes/TreinamentoForm";
-import ModulosTabela from "../../components/CriaTComponentes/ModulosTabela";
-import AbrirModulo from "../../components/CriaTComponentes/AbrirModulo";
-import NovaAulaForm from "../../components/CriaTComponentes/NovaAulaForm";
+import TreinamentoSidebar from "./components/TreinamentoSideBar";
+import TreinamentoForm from "./components/TreinamentoForm";
+import ModulosTabela from "./components/ModulosTabela";
+import AbrirModulo from "./components/AbrirModulo";
+import NovaAulaForm from "./components/NovaAulaForm";
 
 import "../../css/TreinamentoCreate.css";
 
