@@ -16,7 +16,7 @@ class Api {
             options.body = JSON.stringify(body);
         }
 
-        let url = `https://localhost:7284/api/${setor}`;
+        let url = `https://apipte-production.up.railway.app/api/${setor}`;
 
         if (id !== null) {
             url += `/${id}`;
