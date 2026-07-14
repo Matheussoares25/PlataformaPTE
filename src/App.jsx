@@ -11,6 +11,7 @@ import TreinamentoSidebar from "./components/CriaTComponentes/TreinamentoSideBar
 import PrivateRoute from "./services/PrivateRoute";
 import LoadingOverlay from "./components/LoadingOverlay";
 import Dashboard from "./pages/Dashboard";
+import Perfil from "./pages/PerfilPage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./App.css";
@@ -73,6 +74,15 @@ function App() {
             <PrivateRoute>
               <Navbar />
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/Perfil"
+          element={
+            <PrivateRoute>
+              <Navbar />
+              <Perfil />
             </PrivateRoute>
           }
         />
