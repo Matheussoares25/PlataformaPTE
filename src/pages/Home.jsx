@@ -42,7 +42,7 @@ function Home() {
         </div>
       </div>
       <div
-        class="offcanvas offcanvas-end bg-dark"
+        className="offcanvas offcanvas-end bg-dark"
         tabindex="-1"
         id="offcanvasRight"
         aria-labelledby="offcanvasRightLabel"
@@ -65,16 +65,13 @@ function Home() {
           <div className="offcanvas-menu">
             <Link
               to="/Perfil"
-              className="offcanvas-menu-item"
-              data-bs-dismiss="offcanvas"
-            >
+              className="offcanvas-menu-item"            >
               <span>Meu Perfil</span>
             </Link>
 
             <Link
               to="/treinamentos"
               className="offcanvas-menu-item"
-              data-bs-dismiss="offcanvas"
             >
               <span>Treinamentos</span>
             </Link>
@@ -82,7 +79,6 @@ function Home() {
             <Link
               to="/Perfil"
               className="offcanvas-menu-item"
-              data-bs-dismiss="offcanvas"
             >
               <span>Certificadosss</span>
             </Link>
@@ -90,7 +86,6 @@ function Home() {
             <Link
               to="/ranking"
               className="offcanvas-menu-item"
-              data-bs-dismiss="offcanvas"
             >
               <span>Ranking</span>
             </Link>
@@ -98,7 +93,6 @@ function Home() {
             <Link
               to="/ajuda"
               className="offcanvas-menu-item"
-              data-bs-dismiss="offcanvas"
             >
               <span>Ajuda </span>
             </Link>
@@ -106,7 +100,6 @@ function Home() {
             <Link
               to="/Reportes"
               className="offcanvas-menu-item"
-              data-bs-dismiss="offcanvas"
             >
               <span>Reportes</span>
             </Link>
