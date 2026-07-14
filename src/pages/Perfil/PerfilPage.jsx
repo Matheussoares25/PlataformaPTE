@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Api from "../services/EndPoint";
-import "../css/Perfil.css";
+import Api from "../../services/EndPoint";
+import "../../css/Perfil.css";
 
 export default function Perfil() {
   const [usuario, setUsuario] = useState(null);

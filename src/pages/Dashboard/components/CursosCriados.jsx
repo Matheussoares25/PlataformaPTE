@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
-import Api from "../../services/EndPoint";
+import Api from "../../../services/EndPoint";
 
-export default function AlunosCadastradosEmCurso() {
-  const [alunosEmCurso, setAlunosEmCurso] = useState([]);
+export default function CursosCriados() {
+  const [cursosCriados, setCursosCriados] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
 
   useEffect(() => {
     const buscarDados = async () => {
       try {
-        const matricula = await Api.CallEndpoint("UseTreinamentos", "GET");
+        const criados = await Api.CallEndpoint("Treinamento", "GET");
 
-        setAlunosEmCurso(matricula.length);
+        setCursosCriados(criados.length);
       } catch (err) {
       console.error(err);
-            setErro("Não foi possível carregar os dados de alunos.");
+            setErro("Não foi possível carregar os dados de cursos.");
       }
     
       finally {
@@ -26,18 +26,18 @@ export default function AlunosCadastradosEmCurso() {
   }, []);
 
   return (
-    <div className="kpi-card kpi-amber">
+    <div className="kpi-card kpi-red">
       <div className="kpi-icon">
-        <i className="fa-solid fa-user-graduate"></i>
+        <i className="fa-solid fa-book"></i>
       </div>
       <div>
-        <p className="kpi-label">Alunos em curso</p>
+        <p className="kpi-label">Cursos Criados</p>
         {carregando ? (
           <p className="kpi-value">Carregando...</p>
         ) : erro ? (
           <h6 className="kpi-value">{erro}</h6>
         ) : (
-          <p className="kpi-value">{alunosEmCurso}</p>
+          <p className="kpi-value">{cursosCriados}</p>
         )}
       </div>
     </div>

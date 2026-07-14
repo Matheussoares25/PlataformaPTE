@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Api from "../services/EndPoint";
+import Api from "../../services/EndPoint";
 import Swal from "sweetalert2";
-import { swalDeleteVaga, swalDeleteNoticia } from "../components/Textings";
-import "../css/Noticias.css";
+import { swalDeleteVaga, swalDeleteNoticia } from "../../components/Textings";
+import "../../css/Noticias.css";
 
 export default function Noticias() {
   const [noticias, setNoticias] = useState([]);

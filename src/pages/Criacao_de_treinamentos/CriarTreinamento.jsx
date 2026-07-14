@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import Api from "../services/EndPoint";
+import Api from "../../services/EndPoint";
 import { useNavigate } from "react-router-dom";
-import "../css/TreinamentoCreate.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { erro, sucesso } from "../components/icones";
-import TreinamentoSidebar from "../components/CriaTComponentes/TreinamentoSideBar";
-import TreinamentoForm from "../components/CriaTComponentes/TreinamentoForm";
-import ModulosTabela from "../components/CriaTComponentes/ModulosTabela";
-import AbrirModulo from "../components/CriaTComponentes/AbrirModulo";
-import NovaAulaForm from "../components/CriaTComponentes/NovaAulaForm";
+import { erro, sucesso } from "../../components/icones";
+import TreinamentoSidebar from "../../components/CriaTComponentes/TreinamentoSideBar";
+import TreinamentoForm from "../../components/CriaTComponentes/TreinamentoForm";
+import ModulosTabela from "../../components/CriaTComponentes/ModulosTabela";
+import AbrirModulo from "../../components/CriaTComponentes/AbrirModulo";
+import NovaAulaForm from "../../components/CriaTComponentes/NovaAulaForm";
+
+import "../../css/TreinamentoCreate.css";
 
 export default function TreinamentoCreate() {
   const [treinamentos, setTreinamentos] = useState([]);

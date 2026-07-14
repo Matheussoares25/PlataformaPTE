@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 
-import Login from "./pages/login";
-import Home from "./pages/Home";
-import Noticias from "./pages/Noticias";
-import Treinamento from "./pages/Treinamento";
-import TreinamentoCreate from "./pages/CriarTreinamento";
+import Login from "./pages/Login/login";
+import Home from "./pages/Home/Home";
+import Noticias from "./pages/Noticias/Noticias";
+import Treinamento from "./pages/Menu_de_treinamentos/Treinamento";
+import TreinamentoCreate from "./pages/Criacao_de_treinamentos/CriarTreinamento";
 import Navbar from "./components/Navbar";
 import TreinamentoSidebar from "./components/CriaTComponentes/TreinamentoSideBar";
 import PrivateRoute from "./services/PrivateRoute";
 import LoadingOverlay from "./components/LoadingOverlay";
-import Dashboard from "./pages/Dashboard";
-import Perfil from "./pages/PerfilPage";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Perfil from "./pages/Perfil/PerfilPage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./App.css";
