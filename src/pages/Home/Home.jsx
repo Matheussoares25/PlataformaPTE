@@ -1,10 +1,10 @@
-import Api from "../services/EndPoint";
+import Api from "../../services/EndPoint";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { mostrarPerfil } from "../components/Perfil";
+import { mostrarPerfil } from "../../components/Perfil";
 
-import "../css/Home.css";
+import "../../css/Home.css";
 
 function Home() {
   const tipo = localStorage.getItem("tipo");

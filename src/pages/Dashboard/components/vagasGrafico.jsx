@@ -9,7 +9,7 @@ import {
   CartesianGrid,
   Cell,
 } from "recharts";
-import Api from "../../services/EndPoint";
+import Api from "../../../services/EndPoint";
 
 export default function VagasChart() {
   const [dados, setDados] = useState([]);

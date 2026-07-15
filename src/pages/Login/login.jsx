@@ -1,9 +1,11 @@
-import Api from "../services/AuthService";
-import "../css/login.css";
+import Api from "../../services/AuthService";
+
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { termoDeUso } from "../components/Textings";
+import { termoDeUso } from "../../components/Textings";
 import React, { useState, useEffect } from "react";
+
+import "../../css/login.css";
 
 function Login() {
   const navigate = useNavigate();

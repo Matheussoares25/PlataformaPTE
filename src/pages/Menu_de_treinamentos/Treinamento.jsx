@@ -1,11 +1,11 @@
-import Api from '../services/EndPoint';
+import Api from '../../services/EndPoint';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Swal from "sweetalert2";
 
 
-import "../css/Treinamento.css";
+import "../../css/Treinamento.css";
 export default function Treinamento() {
     const tipo = localStorage.getItem('tipo');
 
