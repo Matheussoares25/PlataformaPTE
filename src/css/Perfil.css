@@ -1,0 +1,304 @@
+@import url('../styles/theme.css');
+
+:root {
+    --pf-cyan: #46abe5;
+    --pf-blue: #2f6fed;
+}
+
+.perfil-page {
+    position: relative;
+    min-height: 100vh;
+    background: #0b0e1a;
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 28px 28px;
+    padding: 48px 24px 64px;
+    overflow: hidden;
+}
+
+.perfil-glow-a,
+.perfil-glow-b {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.perfil-glow-a {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    left: -100px;
+    background: rgba(70, 171, 229, 0.16);
+}
+
+.perfil-glow-b {
+    width: 380px;
+    height: 380px;
+    bottom: -100px;
+    right: -80px;
+    background: rgba(47, 111, 237, 0.14);
+}
+
+/* ---------- Header ---------- */
+
+.perfil-header {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto 32px;
+}
+
+.perfil-eyebrow {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pf-cyan);
+    margin: 0 0 6px;
+}
+
+/* ---------- Grid ---------- */
+
+.perfil-grid {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.perfil-panel {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 28px;
+}
+
+/* ---------- Cartão principal ---------- */
+
+.perfil-avatar-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.perfil-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pf-cyan), var(--pf-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.perfil-nome {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+}
+
+.perfil-tipo-badge {
+    display: inline-block;
+    background: rgba(70, 171, 229, 0.14);
+    border: 1px solid rgba(70, 171, 229, 0.3);
+    color: var(--pf-cyan);
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+}
+
+.perfil-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.perfil-field label {
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+}
+
+.perfil-field p {
+    color: white;
+    font-size: 14.5px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.perfil-field-static {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.perfil-field input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 14.5px;
+    transition: border-color 0.2s ease;
+}
+
+.perfil-field input:focus {
+    outline: none;
+    border-color: var(--pf-cyan);
+}
+
+.perfil-erro {
+    color: #f27272;
+    font-size: 13px;
+    margin: 20px 0 0;
+}
+
+.perfil-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Cartão lateral ---------- */
+
+.perfil-side .panel-header {
+    margin-bottom: 18px;
+}
+
+.perfil-side .panel-header h5 {
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.perfil-summary-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.perfil-summary-item:last-child {
+    border-bottom: none;
+}
+
+.perfil-summary-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+}
+
+.perfil-summary-value {
+    color: white;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.perfil-status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.perfil-status-ativo {
+    background: rgba(34, 197, 139, 0.14);
+    border: 1px solid rgba(34, 197, 139, 0.35);
+    color: #22c58b;
+}
+
+.perfil-status-inativo {
+    background: rgba(239, 93, 93, 0.12);
+    border: 1px solid rgba(239, 93, 93, 0.3);
+    color: #f27272;
+}
+
+/* ---------- Estado vazio ---------- */
+
+.training-empty {
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 56px 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+}
+
+.training-empty-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    opacity: 0.6;
+}
+
+.training-empty h5 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0;
+}
+.perfil-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    color: white;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.perfil-select:focus {
+    outline: none;
+    border-color: var(--pf-cyan);
+}
+
+.perfil-select option {
+    background: #14172a;
+    color: white;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+    .perfil-grid {
+        grid-template-columns: 1fr;
+    }
+    .perfil-fields {
+        grid-template-columns: 1fr;
+    }
+    .perfil-page {
+        padding: 32px 20px;
+    }
+}
