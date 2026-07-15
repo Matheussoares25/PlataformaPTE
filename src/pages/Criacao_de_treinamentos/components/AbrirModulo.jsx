@@ -1,4 +1,4 @@
-import Api from "../../services/EndPoint";
+import Api from "../../../services/EndPoint";
 export default function AbrirModulo({
   abrirModulo,
   id,

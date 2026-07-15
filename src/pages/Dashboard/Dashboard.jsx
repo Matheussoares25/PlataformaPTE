@@ -1,7 +1,7 @@
-import "../css/Dashboard.css";
-import VagasChart from "../components/DashBoardComponentes/vagasGrafico";
-import CursosCriados from "../components/DashBoardComponentes/CursosCriados";
-import AlunosCadastradosEmCurso from "../components/DashBoardComponentes/AlunosEmCurso";
+import "../../css/Dashboard.css";
+import VagasChart from "./components/vagasGrafico";
+import CursosCriados from "./components/CursosCriados";
+import AlunosCadastradosEmCurso from "./components/AlunosEmCurso";
 export default function Dashboard({ dados }) {
   // dados esperado: { totalUsuarios, treinamentosAtivos, certificadosEmitidos, taxaConclusao, desempenhoMensal, topUsuarios }
   const {
