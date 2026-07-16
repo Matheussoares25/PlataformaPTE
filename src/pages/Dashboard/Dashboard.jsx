@@ -2,12 +2,13 @@ import "../../css/Dashboard.css";
 import VagasChart from "./components/vagasGrafico";
 import CursosCriados from "./components/CursosCriados";
 import AlunosCadastradosEmCurso from "./components/AlunosEmCurso";
+import NumeroDeUsuarios from "./components/NumeroDeUsuarios";
+import ProvasRealizadas from "./components/ProvasRealizadas";
+import Swal from "sweetalert2";
 export default function Dashboard({ dados }) {
   // dados esperado: { totalUsuarios, treinamentosAtivos, certificadosEmitidos, taxaConclusao, desempenhoMensal, topUsuarios }
   const {
     cursosCriados = 5,
-    provasRealizadas = 5,
-    numeroUsuarios = 5,
     noticias = 10,
     certificados = 5,
     problemasReportados = 580,
@@ -40,28 +41,10 @@ export default function Dashboard({ dados }) {
       </div>
       {/* ---------- KPIs ---------- */}
       <div className="dashboard-kpis">
-            <CursosCriados />
-            <AlunosCadastradosEmCurso />
-            
-        <div className="kpi-card kpi-indigo">
-          <div className="kpi-icon">
-            <i className="fa-solid fa-file-pen"></i>
-          </div>
-          <div>
-            <p className="kpi-label">Provas Realizadas</p>
-            <h3 className="kpi-value">{provasRealizadas}</h3>
-          </div>
-        </div>
-
-        <div className="kpi-card kpi-green">
-          <div className="kpi-icon">
-            <i className="fa-solid fa-users"></i>
-          </div>
-          <div>
-            <p className="kpi-label">Número de Usuários</p>
-            <h3 className="kpi-value">{numeroUsuarios}</h3>
-          </div>
-        </div>
+        <CursosCriados />
+        <AlunosCadastradosEmCurso />
+        <ProvasRealizadas />  
+        <NumeroDeUsuarios />
 
         <div className="kpi-card kpi-cyan">
           <div className="kpi-icon">
